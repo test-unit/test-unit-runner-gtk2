@@ -5,8 +5,8 @@
 # License:: Ruby license.
 
 require "gtk2"
+require "test/unit/ui/testrunner"
 require "test/unit/ui/testrunnermediator"
-require "test/unit/ui/testrunnerutilities"
 
 module Test
   module Unit
@@ -53,9 +53,7 @@ module Test
           end # def clear
         end
 
-        class TestRunner
-          extend TestRunnerUtilities
-
+        class TestRunner < UI::TestRunner
           def lazy_initialize(symbol)
             if !instance_eval("defined?(@#{symbol})") then
               yield
@@ -440,12 +438,8 @@ module Test
             @result
           end # def start
 
-          def initialize(suite, output_level = NORMAL)
-            if suite.respond_to?(:suite) then
-              @suite = suite.suite
-            else
-              @suite = suite
-            end
+          def initialize(suite, options={})
+            super
             @result = nil
 
             @runner = Thread.current
@@ -455,7 +449,7 @@ module Test
               Gtk.main
             end
             @viewer.join rescue nil # wait deadlock to handshake
-          end # def initialize(suite)
+          end # def initialize
 
         end # class TestRunner
 
