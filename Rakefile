@@ -1,25 +1,35 @@
 # -*- ruby -*-
 
+require 'pathname'
+
+base_dir = Pathname(__FILE__).dirname.expand_path
+test_unit_dir = (base_dir.parent + "test-unit").expand_path
+test_unit_lib_dir = test_unit_dir + "lib"
+lib_dir = base_dir + "lib"
+
+$LOAD_PATH.unshift(test_unit_lib_dir.to_s)
+$LOAD_PATH.unshift(lib_dir.to_s)
+
+require 'test/unit/runner/gtk2'
+
 require 'rubygems'
-gem 'test-unit'
 require 'hoe'
-require './lib/test/unit/runner/gtk2'
 
 Test::Unit.run = true
 
 version = Test::Unit::Runner::GTK2::VERSION
 ENV["VERSION"] = version
-Hoe.new('test-unit-runner-gtk2', version) do |p|
-  p.developer('Kouhei Sutou', 'kou@cozmixng.org')
-  p.developer('Ryan Davis', 'ryand-ruby@zenspider.com')
+Hoe.spec('test-unit-runner-gtk2') do
+  self.version = version
+  self.rubyforge_name = "test-unit"
 
-  p.rubyforge_name = "test-unit"
-
-  p.extra_deps = ["test-unit"]
+  developer('Kouhei Sutou', 'kou@clear-code.com')
+  extra_deps.concat([["test-unit"],
+                     ["gtk2"]])
 end
 
 task :tag do
-  message = "Released Test::Unit::Runner::GTK+ #{version}!"
+  message = "Released Test::Unit::Runner::GTK2 #{version}!"
   base = "svn+ssh://#{ENV['USER']}@rubyforge.org/var/svn/test-unit/extensions/test-unit-runner-gtk2/"
   sh 'svn', 'copy', '-m', message, "#{base}trunk", "#{base}tags/#{version}"
 end
