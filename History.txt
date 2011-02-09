@@ -1,3 +1,9 @@
+=== 0.0.2 / 2011-02-09
+
+* 1 major enhancement
+
+  * use gtk2 gem.
+
 === 0.0.1 / 2008-06-18
 
 * 1 major enhancement
