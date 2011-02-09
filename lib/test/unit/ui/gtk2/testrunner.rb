@@ -12,9 +12,6 @@ module Test
   module Unit
     module UI
       module GTK2
-
-        Gtk.init
-
         class EnhancedLabel < Gtk::Label
           def set_text(text)
             super(text.gsub(/\n\t/, "\n    "))
