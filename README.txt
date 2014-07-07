@@ -1,6 +1,6 @@
 = Test::Unit::Runner::GTK2
 
-* http://rubyforge.org/projects/test-unit/
+* https://github.com/test-unit/test-unit-runner-gtk2
 
 == DESCRIPTION:
 
