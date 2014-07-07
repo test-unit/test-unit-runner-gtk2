@@ -21,7 +21,6 @@ version = Test::Unit::Runner::GTK2::VERSION
 ENV["VERSION"] = version
 Hoe.spec('test-unit-runner-gtk2') do
   self.version = version
-  self.rubyforge_name = "test-unit"
 
   developer('Kouhei Sutou', 'kou@clear-code.com')
   extra_deps.concat([["test-unit"],
